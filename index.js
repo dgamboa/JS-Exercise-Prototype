@@ -140,10 +140,10 @@ Baby.prototype.play = function() {
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. Window binding: without context `this` will bind to the window / global object (unless in strict mode, in which case it returns undefined)
+    2. Implicit binding: `this` will bind to the object on the left of the dot when calling a method on that object
+    3. Explicit binding: `this` will bind to the object passed into .call(), .apply() or .bind()
+    4. New binding: `this` will bind to the object created by the constructor function
   */
   
   
