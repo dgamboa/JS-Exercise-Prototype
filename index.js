@@ -20,24 +20,24 @@ function Airplane(name) {
   };
   
   
-  /*
-  // 👇 COMPLETE YOUR WORK BELOW 👇
-  // 👇 COMPLETE YOUR WORK BELOW 👇
-  // 👇 COMPLETE YOUR WORK BELOW 👇
-  */
+/*
+// 👇 COMPLETE YOUR WORK BELOW 👇
+// 👇 COMPLETE YOUR WORK BELOW 👇
+// 👇 COMPLETE YOUR WORK BELOW 👇
+*/
   
-  /*
-    TASK 1
-      - Write a Person Constructor that initializes `name` and `age` from arguments.
-      - All instances of Person should initialize with an empty `stomach` array.
-      - Give instances of Person the ability to `.eat("someFood")`:
-          + When eating an edible, it should be pushed into the `stomach`.
-          + The `eat` method should have no effect if there are 10 items in the `stomach`.
-      - Give instances of Person the ability to `.poop()`:
-          + When an instance poops, its `stomach` should empty.
-      - Give instances of Person a method `.toString()`:
-          + It should return a string with `name` and `age`. Example: "Mary, 50"
-  */
+/*
+  TASK 1
+    - Write a Person Constructor that initializes `name` and `age` from arguments.
+    - All instances of Person should initialize with an empty `stomach` array.
+    - Give instances of Person the ability to `.eat("someFood")`:
+        + When eating an edible, it should be pushed into the `stomach`.
+        + The `eat` method should have no effect if there are 10 items in the `stomach`.
+    - Give instances of Person the ability to `.poop()`:
+        + When an instance poops, its `stomach` should empty.
+    - Give instances of Person a method `.toString()`:
+        + It should return a string with `name` and `age`. Example: "Mary, 50"
+*/
   
 function Person(name, age) {
   this.name = name;
@@ -86,15 +86,17 @@ function Car(model, milesPerGallon) {
 }
 
 Car.prototype.fill = function(gallons) {
-  this.tank = gallons;
+  this.tank += gallons;
 }
 
 Car.prototype.drive = function(distance) {
-  
+  this.tank += distance;
+  const gallonsConsumed = distance / this.milesPerGallon;
+  this.tank - gallonsConsumed > 0 ? this.tank = this.tank - gallonsConsumed : 0;
 }
 
-
-  
+const audi = new Car('S5', 30);
+console.log(audi);
   
   /*
     TASK 3
@@ -103,10 +105,16 @@ Car.prototype.drive = function(distance) {
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
-   
-  }
- 
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
+}
+
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function() {
+  return `Playing with ${this.favoriteToy}`;
+}
   
   /* 
     TASK 4
