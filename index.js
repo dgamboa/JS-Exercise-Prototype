@@ -90,12 +90,33 @@ Car.prototype.fill = function(gallons) {
 }
 
 Car.prototype.drive = function(distance) {
-  this.tank += distance;
   const gallonsConsumed = distance / this.milesPerGallon;
-  this.tank - gallonsConsumed > 0 ? this.tank = this.tank - gallonsConsumed : 0;
+  if (this.tank - gallonsConsumed >= 0) {
+    this.tank = Number((this.tank - gallonsConsumed).toFixed(2));
+    this.odometer += distance;
+  } else {
+    const extraFuelNeeded = Number((gallonsConsumed - this.tank).toFixed(2));
+    const actualDistance = Number((this.milesPerGallon * this.tank).toFixed(2));
+    this.tank = 0;
+    this.odometer += actualDistance;
+    console.log(`You ran out of fuel before completing your trip! You needed ${extraFuelNeeded} extra gallon${extraFuelNeeded === 1 ? "": "s"} to complete the trip. You only made it ${actualDistance} mile${actualDistance === 1 ? "": "s"}!`);
+  }
 }
 
+// Testing the fill and drive functionality
 const audi = new Car('S5', 30);
+console.log(audi);
+
+audi.fill(5);
+console.log(audi);
+
+audi.drive(145);
+console.log(audi);
+
+audi.drive(145);
+console.log(audi);
+
+audi.fill(20);
 console.log(audi);
   
   /*
